@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Test-App-3
+        Browser Notification Test App
         </p>
         <SystemTimeOut />
       </header>
