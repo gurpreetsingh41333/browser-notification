@@ -50,6 +50,7 @@ const SystemTimeOut = () => {
     let inactivityTimeOutId = null
     const resetSession = () => {
       clearTimeout(notificationTimeOutId)
+      clearInterval(warningIntervalId)
       /** show notification before 1 minute of warning popup */
       notificationTimeOutId = setTimeout(
         showBrowserNotification,
@@ -81,7 +82,7 @@ const SystemTimeOut = () => {
   
     // Otherwise, we need to ask the user for permission
     else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
+      Notification.requestPermission().then((permission) => {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
           new Notification("you're logged in");
@@ -138,7 +139,7 @@ const SystemTimeOut = () => {
                   </button>
                 </div>
                 <button
-                  onClick={()=>{console.log('logout clicked')}}
+                  onClick={()=>{console.log('logout clicked'); inactivityTracker()}}
                 >
                   logout
                 </button>
