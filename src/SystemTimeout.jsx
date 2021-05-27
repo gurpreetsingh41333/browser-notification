@@ -82,12 +82,7 @@ const SystemTimeOut = () => {
   
     // Otherwise, we need to ask the user for permission
     else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then((permission) => {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          new Notification("you're logged in");
-        }
-      });
+      Notification.requestPermission()
     }
   
     // At last, if the user has denied notifications, and you
