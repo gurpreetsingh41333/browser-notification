@@ -14,14 +14,12 @@ const SystemTimeOut = () => {
   /** this fn shows the borwser notification before 1 minute of warning popup */
   const showBrowserNotification = () => {
     if (Notification.permission === 'granted') {
-      /* eslint-disable no-new */
       new Notification('Are you still here!', {
         body: 'Your Casa session is about to expire!',
         icon: logo
       })
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then(() => {
-      /* eslint-disable no-new */
         new Notification('Are you still here!', {
           body: 'Your Casa session is about to expire!',
           icon: logo
@@ -38,7 +36,8 @@ const SystemTimeOut = () => {
       timeleft -= 1
       if (timeleft <= 0) {
         setWarningMsg(false)
-        console.log('logout')
+        console.log('successfully logged out')
+        inactivityTracker()
       }
       setTimeRemaining(timeleft)
     }, 1000)
@@ -69,15 +68,15 @@ const SystemTimeOut = () => {
   }
 
   const notifyMe = () =>{
+    console.log('Notification.permission', Notification.permission);
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
     }
-  
     // Let's check whether notification permissions have already been granted
     else if (Notification.permission === "granted") {
       // If it's okay let's create a notification
-      var notification = new Notification("Hi there!");
+      new Notification("you're logged in");
     }
   
     // Otherwise, we need to ask the user for permission
@@ -85,7 +84,7 @@ const SystemTimeOut = () => {
       Notification.requestPermission().then(function (permission) {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          var notification = new Notification("Hi there!");
+          new Notification("you're logged in");
         }
       });
     }
